@@ -1,13 +1,14 @@
 
 # SysPulse
 >System Health Dashboard - Monitor your Linux system in real-time
-
+```text
 ███████╗██╗   ██╗███████╗██████╗ ██╗   ██╗██╗     ███████╗███████╗
 ██╔════╝╚██╗ ██╔╝██╔════╝██╔══██╗██║   ██║██║     ██╔════╝██╔════╝
 ███████╗ ╚████╔╝ ███████╗██████╔╝██║   ██║██║     ███████╗█████╗  
 ╚════██║  ╚██╔╝  ╚════██║██╔═══╝ ██║   ██║██║     ╚════██║██╔══╝  
 ███████║   ██║   ███████║██║     ╚██████╔╝███████╗███████║███████╗
 ╚══════╝   ╚═╝   ╚══════╝╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝
+```
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange.svg)](https://ubuntu.com/)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/hadiakhokhar/syspulse)
@@ -55,7 +56,7 @@ python3 -m http.server 8080
 ```
 
 ## ⚙️ Configuration
-Edit `syspulse.sh` to customize:
+Edit `monitor.sh` to customize:
 
 ```bash
 # ================================================================
