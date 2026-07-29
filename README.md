@@ -8,6 +8,7 @@
 ╚════██║  ╚██╔╝  ╚════██║██╔═══╝ ██║   ██║██║     ╚════██║██╔══╝  
 ███████║   ██║   ███████║██║     ╚██████╔╝███████╗███████║███████╗
 ╚══════╝   ╚═╝   ╚══════╝╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange.svg)](https://ubuntu.com/)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/hadiakhokhar/syspulse)
@@ -34,7 +35,7 @@
 ```bash
 git clone https://github.com/yourusername/syspulse.git
 cd syspulse
-chmod +x syspulse.sh install.sh
+chmod +x monitor.sh install.sh
 ./install.sh
 ```
 
@@ -51,11 +52,11 @@ python3 -m http.server 8080
 
 ### 3️⃣ Run Manually (Optional)
 ```bash
-./syspulse.sh
+./monitor.sh
 ```
 
 ## ⚙️ Configuration
-Edit `syspulse.sh` to customize:
+Edit `monitor.sh` to customize:
 
 ```bash
 # ================================================================
@@ -75,7 +76,7 @@ MEMORY_THRESHOLD=90    # Alert if memory > 90%
 CPU_THRESHOLD=80       # Alert if CPU > 80%
 ```
 
-> `syspulse.sh` and `template.html` must live in the same folder — the script reads the template, fills in the live system data, and writes a timestamped report into `reports/`.
+> `monitor.sh` and `template.html` must live in the same folder — the script reads the template, fills in the live system data, and writes a timestamped report into `reports/`.
 
 ## Dashboard Preview
 ![Project Screenshot](images/screenshot.png)
@@ -85,7 +86,7 @@ CPU_THRESHOLD=80       # Alert if CPU > 80%
 ```
 syspulse/
 ├── README.md                          # Documentation with ASCII art
-├── syspulse.sh                        # Main monitoring script
+├── monitor.sh                        # Main monitoring script
 ├── template.html                      # HTML template used to render the dashboard
 ├── install.sh                         # One-click installer
 ├── uninstall.sh                       # Uninstaller
@@ -103,7 +104,7 @@ After installation, SysPulse runs automatically:
 
 ```bash
 # Runs every 5 minutes
-*/5 * * * * /path/to/syspulse/syspulse.sh
+*/5 * * * * /path/to/syspulse/monitor.sh
 ```
 
 ## Troubleshooting
@@ -139,7 +140,7 @@ cat reports/alerts.log
 firefox reports/dashboard_latest.html
 
 # Run manual scan
-./syspulse.sh
+./monitor.sh
 ```
 
 ## 🔄 Uninstall

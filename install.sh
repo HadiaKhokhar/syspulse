@@ -47,8 +47,8 @@ if [ ! -f "template.html" ]; then
 fi
 
 # Make executable
-chmod +x syspulse.sh
-echo -e "${GREEN}✅ syspulse.sh is executable${NC}"
+chmod +x monitor.sh
+echo -e "${GREEN}✅ monitor.sh is executable${NC}"
 
 # Install Python (for web server)
 echo -e "${YELLOW}📦 Checking dependencies...${NC}"
@@ -69,7 +69,7 @@ echo -e "${YELLOW}🕐 Schedule automatic monitoring?${NC}"
 read -p "Add to cron to run every 5 minutes? (y/n): " answer
 
 if [[ $answer == "y" || $answer == "Y" ]]; then
-    SCRIPT_PATH="$SCRIPT_DIR/syspulse.sh"
+    SCRIPT_PATH="$SCRIPT_DIR/monitor.sh"
     (crontab -l 2>/dev/null; echo "*/5 * * * * $SCRIPT_PATH") | crontab -
     echo -e "${GREEN}✅ Cron job added (every 5 minutes)${NC}"
 fi
@@ -77,7 +77,7 @@ fi
 # Run initial report
 echo ""
 echo -e "${YELLOW}📊 Generating initial report...${NC}"
-./syspulse.sh
+./monitor.sh
 echo -e "${GREEN}✅ Initial report generated${NC}"
 
 # Checks whether a TCP port is already taken on localhost.
@@ -139,7 +139,7 @@ echo "📁 Project   : $SCRIPT_DIR"
 echo "📁 Dashboard : $SCRIPT_DIR/reports/dashboard_latest.html"
 echo "📝 Log       : $SCRIPT_DIR/reports/monitor.log"
 echo ""
-echo "To run manually: ./syspulse.sh"
+echo "To run manually: ./monitor.sh"
 echo "To view dashboard:"
 echo "  firefox \"$SCRIPT_DIR/reports/dashboard_latest.html\""
 echo ""

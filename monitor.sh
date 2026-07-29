@@ -5,12 +5,21 @@
 # ================================================================
 #
 # Project layout:
-#   syspulse/
-#   ├── syspulse.sh        # Main script (this file)
-#   ├── template.html      # HTML template
-#   └── reports/           # Generated reports (auto-created)
-#       └── dashboard_*.html
-#
+#   
+#syspulse/
+#├── README.md                          # Documentation with ASCII art
+#├── monitor.sh                         # Main monitoring script
+#├── template.html                      # HTML template used to render the dashboard
+#├── install.sh                         # One-click installer
+#├── uninstall.sh                       # Uninstaller
+#├── .gitignore                         # Git ignore
+#├── LICENSE                            # MIT License
+#└── reports/                           # Generated reports (auto-created)
+#    ├── dashboard_latest.html          # Always the most recent report
+#   ├── dashboard_YYYYMMDD_HHMMSS.html # Timestamped snapshot per run
+#    ├── monitor.log
+#    └── alerts.log
+
 # ================================================================
 
 # ================================================================
