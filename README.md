@@ -158,7 +158,7 @@ MIT License - Free to use, modify, and distribute.
 ## 🙏 Acknowledgments
 
 - Built with ❤️ for the Linux community
-- Thanks to all contributors
+
 
 ---
 
