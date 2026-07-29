@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="60">
+    <title>SysPulse | System Health Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f6f6f4;
+            --card-bg: #ffffff;
+            --border: #e4e2dd;
+            --ink: #2b2b2b;
+            --muted: #8a8a85;
+            --accent:rgb(118, 11, 11);
+            --accent-soft: #eef1f5;
+            --good: #a3282f;
+            --warn: #b8860b;
+            --danger: #a3282f;
+            --track: #edece8;
+        }
+
+        body {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            padding: 32px 20px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            border-radius: 10px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .header .brand {
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            font-weight: 600;
+        }
+
+        .header h1 {
+            color: var(--ink);
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .header h1 .pulse-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-right: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        .meta-row {
+            display: flex;
+            gap: 28px;
+            margin-top: 14px;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .meta-row span strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 14px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(29, 53, 87, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(29, 53, 87, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(29, 53, 87, 0);
+            }
+        }
+
+        /* ---------- Alerts ---------- */
+        .alerts {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--danger);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .alerts.ok {
+            border-left-color: var(--good);
+        }
+
+        .alerts strong {
+            color: var(--danger);
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .alerts.ok strong {
+            color: var(--good);
+        }
+
+        .alerts pre {
+            color: var(--ink);
+            font-size: 13px;
+            white-space: pre-wrap;
+            margin-top: 8px;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+        }
+
+        .alerts .no-alerts {
+            color: var(--good);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ---------- Grid / Cards ---------- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h2 {
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .card .value {
+            font-size: 40px;
+            font-weight: 400;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+            margin: 8px 0 4px;
+        }
+
+        .status-good {
+            color: var(--good);
+        }
+
+        .status-warning {
+            color: var(--warn);
+        }
+
+        .status-danger {
+            color: var(--danger);
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 9px 0;
+            border-bottom: 1px solid #f0efec;
+            font-size: 13.5px;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric .key {
+            color: var(--muted);
+        }
+
+        .metric .val {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: var(--track);
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+            margin: 10px 0 14px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .fill-good {
+            background: var(--good);
+        }
+
+        .fill-warning {
+            background: var(--warn);
+        }
+
+        .fill-danger {
+            background: var(--danger);
+        }
+
+        /* ---------- Footer ---------- */
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            margin-top: 28px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+        }
+
+        .footer .brand {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .footer .tagline {
+            display: block;
+            margin-top: 6px;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            font-style: italic;
+            letter-spacing: 0;
+            font-size: 12px;
+            color: #b0aea6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="brand">System Health Dashboard</div>
+            <h1><span class="pulse-dot"></span>SysPulse</h1>
+            <div class="meta-row">
+                <span>Generated: <strong>__TIMESTAMP__</strong></span>
+                <span>Host: <strong>__HOSTNAME__</strong></span>
+            </div>
+            <div class="badge">Report by SysPulse</div>
+        </div>
+
+        __ALERTS_SECTION__
+
+        <div class="grid">
+
+            <div class="card">
+                <h2>System Info</h2>
+                __SYSTEM_INFO_ROWS__
+            </div>
+
+            <div class="card">
+                <h2>Memory</h2>
+                <div class="value __MEMORY_COLOR__">__MEMORY_PERCENT__%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill __MEMORY_FILL__" style="width: __MEMORY_PERCENT__%"></div>
+                </div>
+                __MEMORY_ROWS__
+            </div>
+
+            <div class="card">
+                <h2>CPU</h2>
+                <div class="value __CPU_COLOR__">__CPU_PERCENT__%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill __CPU_FILL__" style="width: __CPU_PERCENT__%"></div>
+                </div>
+                <div class="metric"><span class="key">Current Load</span><span class="val">__CPU_PERCENT__%</span></div>
+            </div>
+
+            <div class="card">
+                <h2>Disk Usage</h2>
+                __DISK_ROWS__
+            </div>
+
+            <div class="card">
+                <h2>Top CPU Processes</h2>
+                __PROCESS_ROWS__
+            </div>
+
+            <div class="card">
+                <h2>Network</h2>
+                __NETWORK_ROWS__
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <span class="brand">SysPulse</span>
+            <span style="color:#ccc;margin:0 10px;">|</span>
+            <span>System Health Monitor v1.0</span>
+            <span style="color:#ccc;margin:0 10px;">|</span>
+            <span>Generated: __FOOTER_DATE__</span>
+            <span class="tagline">"Keep your system's pulse"</span>
+        </div>
+
+    </div>
+</body>
+
+</html>
