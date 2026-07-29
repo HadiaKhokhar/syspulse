@@ -1,13 +1,14 @@
 
 # SysPulse
 >System Health Dashboard - Monitor your Linux system in real-time
-
+```text
 ███████╗██╗   ██╗███████╗██████╗ ██╗   ██╗██╗     ███████╗███████╗
 ██╔════╝╚██╗ ██╔╝██╔════╝██╔══██╗██║   ██║██║     ██╔════╝██╔════╝
 ███████╗ ╚████╔╝ ███████╗██████╔╝██║   ██║██║     ███████╗█████╗  
 ╚════██║  ╚██╔╝  ╚════██║██╔═══╝ ██║   ██║██║     ╚════██║██╔══╝  
 ███████║   ██║   ███████║██║     ╚██████╔╝███████╗███████║███████╗
 ╚══════╝   ╚═╝   ╚══════╝╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝
+```
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange.svg)](https://ubuntu.com/)
